@@ -1,0 +1,28 @@
+{
+  "name": "siteforge",
+  "version": "0.0.1",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elliot14A/siteforge.git"
+  },
+  "keywords": [
+    "htmx",
+    "golang",
+    "tailwind",
+    "alpinejs"
+  ],
+  "author": "elliot alderson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elliot14A/siteforge/issues"
+  },
+  "homepage": "https://github.com/elliot14A/siteforge#readme",
+  "dependencies": {
+    "tailwind": "^4.0.0"
+  }
+}
