@@ -1,0 +1,48 @@
+package dashboard
+
+import "github.com/elliot14A/siteforge/templates/layout"
+
+templ Login() {
+	@layout.DashboardAuthLayout() {
+		<div class="container w-full flex flex-col items-center justify-center">
+			<div class="mt-20 w-full">
+				<p class="text-black text-center text-4xl font-bold">Siteforge.</p>
+				<form class="container w-full max-w-sm mx-auto mt-8">
+					<div class="mb-4">
+						<label
+							class="block text-gray-700 text-sm font-bold mb-2"
+							htmlFor="email"
+						>
+							Email
+						</label>
+						<input
+							type="text"
+							id="email"
+							class="appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-black focus:border-black"
+						/>
+					</div>
+					<div class="mb-4">
+						<label
+							class="block text-gray-700 text-sm font-bold mb-2"
+							htmlFor="password"
+						>
+							Password	
+						</label>
+						<input
+							type="password"
+							id="password"
+							class="appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-black focus:border-black"
+						/>
+					</div>
+					<div class="container bg-black text-white rounded flex items-center justify-between text-center"></div>
+					<p class="text-sm text-gray-500 text-center m-10">
+						forgot password?
+						<a href="/register" class="pl-1 text-blue-600">
+							reset!
+						</a>
+					</p>
+				</form>
+			</div>
+		</div>
+	}
+}
