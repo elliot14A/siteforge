@@ -24,5 +24,8 @@
   "homepage": "https://github.com/elliot14A/siteforge#readme",
   "dependencies": {
     "tailwind": "^4.0.0"
+  },
+  "devDependencies": {
+    "daisyui": "^4.7.3"
   }
 }

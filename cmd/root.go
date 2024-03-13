@@ -6,7 +6,7 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "siteforge-server",
+	Use:   "siteforge",
 	Short: "Siteforge",
 	Long:  "Siteforge is a static site generator",
 }

@@ -4,4 +4,4 @@ export const content = ["templates/**/*.templ"];
 export const theme = {
   extend: {},
 };
-export const plugins = [];
+export const plugins = [require("daisyui")];

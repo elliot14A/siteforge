@@ -16,7 +16,7 @@ templ-watch:
 
 .PHONY: dev
 dev:
-	go build -o ./tmp/ && air server
+	go build -o ./tmp/ && air serve
 
 .PHONY: build
 build:
