@@ -1,48 +1,58 @@
 package dashboard
 
-import "github.com/elliot14A/siteforge/templates/layout"
-
 templ Login() {
-	@layout.DashboardAuthLayout() {
-		<div class="container w-full flex flex-col items-center justify-center">
-			<div class="mt-20 w-full">
-				<p class="text-black text-center text-4xl font-bold">Siteforge.</p>
-				<form class="container w-full max-w-sm mx-auto mt-8">
-					<div class="mb-4">
-						<label
-							class="block text-gray-700 text-sm font-bold mb-2"
-							htmlFor="email"
-						>
-							Email
-						</label>
-						<input
-							type="text"
-							id="email"
-							class="appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-black focus:border-black"
-						/>
-					</div>
-					<div class="mb-4">
-						<label
-							class="block text-gray-700 text-sm font-bold mb-2"
-							htmlFor="password"
-						>
-							Password	
-						</label>
-						<input
-							type="password"
-							id="password"
-							class="appearance-none border border-black rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-black focus:border-black"
-						/>
-					</div>
-					<div class="container bg-black text-white rounded flex items-center justify-between text-center"></div>
-					<p class="text-sm text-gray-500 text-center m-10">
-						forgot password?
-						<a href="/register" class="pl-1 text-blue-600">
-							reset!
-						</a>
-					</p>
-				</form>
-			</div>
+
+<head>
+	<title>Siteforge</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<base href="/" />
+	<link rel="stylesheet" href="static/css/style.css" />
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<script defer src="https://unpkg.com/htmx.org@1.9.11"></script>
+	<link rel="stylesheet" href="" />
+</head>
+<div class="w-full h-full flex flex-col items-center justify-center">
+	<div class="w-full" x-data="{ formData: { email: '', password: '' }, isLoading: false }">
+		<div class="w-full flex flex-row justify-center items-center">
+			<image src="/static/assets/siteforge.svg" class="mb-12 h-[13%] w-[13%]"></image>
 		</div>
-	}
+		<form hx-post="/api/login" hx-trigger="submit" class="container mb-32 w-full max-w-sm mx-auto"
+			@submit.prevent="isLoading = true" hx-target="#error">
+			<div class="mb-4">
+				<label class="block text-sm text-gray-600 mb-2" htmlFor="email">
+					Email
+				</label>
+				<input type="text" name="email" autocomplete="off" x-model="formData.email" placeholder="john@doe.com"
+					class="appearance-none border-b-2 border-gray-400 bg-gray-200 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+					required />
+			</div>
+			<div class="mb-4">
+				<label class="block text-gray-600 text-sm mb-2" htmlFor="password">
+					Password
+				</label>
+				<input type="password" name="password" placeholder="********" x-model="formData.password"
+					class="appearance-none border-b-2 border-gray-400 bg-gray-200 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+					required />
+			</div>
+			<button x-bind:disabled="isLoading"
+				class="mt-4 h-10 w-full text-white px-3 py-2 bg-blue-600 transform transition-transform duration-100 ease-in hover:scale-y-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100 disabled:hover:scale-100"
+				type="submit">
+				<span x-show="!isLoading" class="inline-block">Login</span>
+				<div x-show="isLoading" class="flex items-center justify-center text-white">
+					<image src="/static/assets/spinner.svg" class="animate-spin duration-100 m-1"></image>
+				</div>
+			</button>
+			<div id="error"></div>
+		</form>
+	</div>
+</div>
+}
+
+templ LoginError(err string) {
+<div x-data="isLoading = false"
+	class="my-2 border border-red-600 bg-red-400 opacity-60 p-2 flex items-center justify-center">
+	<span class="text-red-800">{ err }</span>
+	<image src="/static/assets/error.svg" class="mx-2 h-5 w-5"></image>
+</div>
 }

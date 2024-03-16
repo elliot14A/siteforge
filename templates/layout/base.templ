@@ -6,6 +6,7 @@ templ header(title string) {
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" href="static/css/style.css"/>
+		<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<link rel="stylesheet" href=""/>
 	</head>
 }
@@ -18,16 +19,4 @@ templ WebsiteLayout() {
 }
 
 templ DashboardLayout() {
-}
-
-templ DashboardAuthLayout() {
-	@header("Siteforge")
-	<div class="m-2 w-full h-screen overflow-clip flex flex-wrap">
-		<div class="relative w-1/2 flex flex-row justify-center items-center">
-			<image src="/static/assets/siteforge.svg" class="mb-12 h-1/4 w-1/4"></image>
-		</div>
-		<div class="w-full md:w-1/2 flex-shrink-0 p-4">
-			{ children... }
-		</div>
-	</div>
 }

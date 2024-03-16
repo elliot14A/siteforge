@@ -4,3 +4,4 @@ go.sum
 /tmp
 /node_modules
 /templates/**/*.txt
+*.db
