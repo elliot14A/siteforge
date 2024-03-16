@@ -1,0 +1,75 @@
+package dashboard
+
+import "github.com/elliot14A/siteforge/templates/components"
+
+var HeroinputParams = components.InputParams{
+Name: "hero-title",
+Placeholder: "XYZ Constructions, Where constructions happens",
+XModel: "",
+InputType: "text",
+Label: "Hero title",
+TextSize: "text-xs",
+}
+
+var HeaderinputParams = components.InputParams{
+Name: "heder-title",
+Placeholder: "A perfect blend of breathtaking architecture designed, with awe-inspiring interiors",
+XModel: "",
+InputType: "text",
+Label: "Header title",
+TextSize: "text-xs",
+}
+
+var TaglineinputParams = components.InputParams{
+Name: "tagline",
+Placeholder: `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
+College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going
+through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from
+sections 1.10.32 `,
+XModel: "",
+InputType: "text",
+Label: "tagline",
+TextSize: "text-xs",
+}
+
+var imageInputParams = components.ImageInputParams{
+ImageUrl: "/static/assets/hero.png",
+Label: "Hero image",
+}
+
+templ HomeContent() {
+<div id="content" class="flex w-full h-full">
+	<div class="container mx-48 mt-12">
+		<div class="mb-10 flex justify-between">
+			<span class="text-2xl">Homepage</span>
+			<button class="px-16 py-1 bg-black text-white">Save</button>
+		</div>
+		<div class="flex flex-col space-y-4">
+			@components.ImageInput(imageInputParams)
+			<div>
+				@components.Input(HeroinputParams)
+			</div>
+		</div>
+		<div class="my-2 flex flex-col space-y-4">
+			@components.Section("Section two")
+			<div>
+				@components.Input(HeaderinputParams)
+			</div>
+			<div>
+				@components.Input(TaglineinputParams)
+			</div>
+		</div>
+		<div class="my-2 flex flex-col space-y-4">
+			@components.Section("Section three")
+			@components.ImageInput(imageInputParams)
+			<div>
+				@components.Input(HeaderinputParams)
+			</div>
+			<div>
+				@components.Input(TaglineinputParams)
+			</div>
+		</div>
+	</div>
+</div>
+}

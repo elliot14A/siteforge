@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"regexp"
 
@@ -52,7 +51,6 @@ func login(ctx echo.Context) error {
 	token, err := tokenJwt.SignedString([]byte(secret))
 
 	if err != nil {
-		fmt.Println(err)
 		return ctx.NoContent(500)
 	}
 

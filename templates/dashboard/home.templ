@@ -3,7 +3,6 @@ package dashboard
 import "github.com/elliot14A/siteforge/templates/layout"
 
 templ Home() {
-	@layout.DashboardLayout() {
-		<div>Hello world</div>
-	}
+	@layout.DashboardLayout()
+	@HomeContent()
 }

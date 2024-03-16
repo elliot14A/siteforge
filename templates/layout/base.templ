@@ -1,28 +1,59 @@
 package layout
 
 templ header(title string) {
-	<head>
-		<title>{ title }</title>
-		<meta charset="UTF-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<base href="/"/>
-		<link rel="stylesheet" href="static/css/style.css"/>
-		<script defer src="https://unpkg.com/htmx.org@1.9.11"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		<link rel="stylesheet" href=""/>
-	</head>
+
+<head>
+	<title>{ title }</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<base href="/" />
+	<link rel="stylesheet" href="static/css/style.css" />
+	<script defer src="https://unpkg.com/htmx.org@1.9.11"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<link rel="stylesheet" href="" />
+</head>
+}
+
+templ dashboardNavBar() {
+<script src="/static/js/navbar.js"></script>
+<nav x-data="navBarlinks()" class="w-full bg-gray-50 border-b border-gray-300 fixed top-0 z-10 h-10">
+	<div class="flex items-center justify-between">
+		<div class="space-x-2 flex items-center justify-evenly">
+			<div class="m-2 pr-4 border-r border-gray-300 flex flex-row justify-evenly items-center">
+				<image src="/static/assets/siteforge.svg" class="h-6 w-6"></image>
+				<div class="ml-2 text-sm font-thin">
+					<span>Site</span>
+				</div>
+				<div class="mx-1 text-sm font-[500]">
+					<span>Forge</span>
+				</div>
+			</div>
+			<div class="h-10 flex space-x-4">
+				<template x-for="link in links">
+					<span x-text="link.name" x-bind:class="active === link.name ? 'border-b-2 border-blue-500' : 'text-gray-400'"
+						class="h-10 pt-[0.80rem] text-xs cursor-pointer transition duration-100 ease-in-out"
+						x-on:click="active = link.name" :hx-get="link.href" hx-trigger="click" hx-target="#content"></span>
+				</template>
+			</div>
+		</div>
+		<div class="hover:bg-red-600 m-1 hover:text-white hover:cursor-pointer">
+			<image src="/static/assets/logout.svg" class="m-2 h-4 w-6"></image>
+		</div>
+	</div>
+</nav>
 }
 
 templ footer() {
-	<footer class="bg-blue-600 p-4"></footer>
+<footer class="bg-blue-600 p-4"></footer>
 }
 
 templ WebsiteLayout() {
 }
 
 templ DashboardLayout() {
-	@header("siteforge")
-	<div>
-		{ children... }
-	</div>
+@header("siteforge")
+@dashboardNavBar()
+<div>
+	{ children... }
+</div>
 }

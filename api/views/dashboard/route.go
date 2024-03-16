@@ -10,5 +10,11 @@ func InitDashboardRoutes(router *echo.Echo) {
 	routes.GET("/login", loginView)
 	routes.Use(middleware.Authorize)
 	routes.GET("/home", homeView)
-	routes.GET("/", func(_ echo.Context) error { return nil })
+	content := routes.Group("/content")
+	content.GET("/home", homeContent)
+	content.GET("/projects", projectsContent)
+	content.GET("/certifications", certificationsContent)
+	content.GET("/gallery", galleryContent)
+	content.GET("/aboutus", aboutUsContent)
+	content.GET("/awards", awardsContent)
 }

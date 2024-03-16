@@ -1,5 +1,25 @@
 package dashboard
 
+import "github.com/elliot14A/siteforge/templates/components"
+
+var passwordInputParam = components.InputParams{
+Name: "password",
+Label: "Password",
+XModel: "formData.password",
+Placeholder: "********",
+InputType: "password",
+TextSize: "text-sm",
+}
+
+var emailInputParam = components.InputParams{
+Name: "email",
+Label: "Email",
+XModel: "formData.email",
+Placeholder: "jonh@doe.com",
+InputType: "text",
+TextSize: "text-sm",
+}
+
 templ Login() {
 
 <head>
@@ -20,20 +40,10 @@ templ Login() {
 		<form hx-post="/api/login" hx-trigger="submit" class="container mb-32 w-full max-w-sm mx-auto"
 			@submit.prevent="isLoading = true" hx-target="#error">
 			<div class="mb-4">
-				<label class="block text-sm text-gray-600 mb-2" htmlFor="email">
-					Email
-				</label>
-				<input type="text" name="email" autocomplete="off" x-model="formData.email" placeholder="john@doe.com"
-					class="appearance-none border-b-2 border-gray-400 bg-gray-200 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-					required />
+				@components.Input(emailInputParam)
 			</div>
 			<div class="mb-4">
-				<label class="block text-gray-600 text-sm mb-2" htmlFor="password">
-					Password
-				</label>
-				<input type="password" name="password" placeholder="********" x-model="formData.password"
-					class="appearance-none border-b-2 border-gray-400 bg-gray-200 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-					required />
+				@components.Input(passwordInputParam)
 			</div>
 			<button x-bind:disabled="isLoading"
 				class="mt-4 h-10 w-full text-white px-3 py-2 bg-blue-600 transform transition-transform duration-100 ease-in hover:scale-y-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100 disabled:hover:scale-100"
