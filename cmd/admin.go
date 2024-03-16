@@ -46,9 +46,11 @@ func create_admin(email string, password string) {
 		return
 	}
 
+	hashedPassword := pkg.HashPassword(password)
+
 	admin := models.User{
 		Email:    email,
-		Password: password,
+		Password: hashedPassword,
 	}
 
 	err = db.Create(&admin).Error
