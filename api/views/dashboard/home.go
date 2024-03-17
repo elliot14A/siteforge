@@ -9,7 +9,3 @@ import (
 func homeView(ctx echo.Context) error {
 	return pkg.Render(ctx, dashboard_view.Home())
 }
-
-func homeContent(ctx echo.Context) error {
-	return pkg.Render(ctx, dashboard_view.HomeContent())
-}
