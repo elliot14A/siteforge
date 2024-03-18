@@ -12,7 +12,7 @@ templ-generate:
 
 .PHONY: templ-watch
 templ-watch:
-	templ generate -watch -proxy=http://localhost:8090
+	templ generate -watch -proxy=http://localhost:3000 
 
 .PHONY: dev
 dev:

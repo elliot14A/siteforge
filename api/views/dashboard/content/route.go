@@ -10,4 +10,5 @@ func InitDashboardContentRoutes(routes *echo.Group) {
 	content.GET("/gallery", galleryContent)
 	content.GET("/aboutus", aboutUsContent)
 	content.GET("/awards", awardsContent)
+	content.GET("/add_project", add_projects)
 }

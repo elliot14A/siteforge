@@ -1,12 +1,16 @@
 package content
 
-templ Projects() {
-<div id="content" class="flex w-full h-full">
+import "github.com/elliot14A/siteforge/models"
+
+templ Projects(projects []models.Project) {
+	/* <div id="content" class="flex w-full h-full">
 	<div class="container mx-48 mt-12">
-		<div class="mb-10 flex justify-between">
+		<div class="mb-10 mt-6 flex justify-between">
 			<span class="text-2xl">Projects</span>
-			<a href="/dashboard/projects/add" class="px-16 py-1 bg-black text-white">New</a>
+			<button hx-get="/dashboard/content/add_project" hx-trigger="click" hx-target="#content"
+				class="px-16 py-1 bg-black text-white transform transition-transform duration-100 ease-in hover:scale-x-105">New</button>
 		</div>
 	</div>
-</div>
+</div> */
+	@AddProject()
 }

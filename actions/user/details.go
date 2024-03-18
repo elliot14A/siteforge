@@ -1,10 +1,11 @@
 package user
 
 import (
+	"fmt"
+
 	"github.com/elliot14A/siteforge/errors"
 	"github.com/elliot14A/siteforge/models"
 	"github.com/elliot14A/siteforge/pkg"
-	"gorm.io/gorm"
 )
 
 func UserByEmail(email string) (*models.User, error) {
@@ -15,10 +16,8 @@ func UserByEmail(email string) (*models.User, error) {
 	err := db.Where("email = ?", email).First(&user).Error
 
 	if err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return nil, errors.ErrInvalidPassword
-		}
-		return nil, errors.ErrInternalError
+		fmt.Println("==>", err)
+		return nil, errors.ErrNotFound
 	}
 
 	return &user, nil

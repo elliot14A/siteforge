@@ -1,35 +1,52 @@
 package components
 
 type InputParams struct {
-InputType string
-Name string
-Placeholder string
-XModel string
-Label string
-TextSize string
+	InputType   string
+	Name        string
+	Placeholder string
+	XModel      string
+	Label       string
+	TextSize    string
 }
 
 type ImageInputParams struct {
-ImageUrl string
-Label string
+	ImageUrl string
+	Label    string
 }
 
 templ Input(input InputParams) {
-<label class={ "block mb-2 " + input.TextSize } htmlFor={ input.Name }>
-  { input.Label }
-</label>
-<input type={ input.InputType } name={ input.Name } placeholder={ input.Placeholder } x-model={ input.XModel }
-  class="appearance-none border-b-2 border-gray-400 bg-gray-100 text-sm w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-  required />
+	<label class={ "block mb-2 " + input.TextSize } htmlFor={ input.Name }>
+		{ input.Label }
+	</label>
+	<input
+		type={ input.InputType }
+		name={ input.Name }
+		placeholder={ input.Placeholder }
+		x-model={ input.XModel }
+		class="appearance-none border-b-2 border-gray-400 bg-gray-100 text-sm w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+		required
+	/>
 }
 
 templ ImageInput(input ImageInputParams) {
-<label class="text-xs">{ input.Label }</label>
-<span class="text-xs font-thin">Max file size is 500kb. Supported files are .jpg and .png</span>
-<div class="w-full my-2 h-[20%] p-2 border-2 border-dotted border-gray-300">
-  <image src={ input.ImageUrl }></image>
-</div>
-<input type="file" name="image" placeholder="Selete an image"
-  class="appearance-none bg-gray-100 w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none"
-  required />
+	<script src="/static/js/drag_drop.js"></script>
+	<div x-data="initDragAndDrop()">
+		<span class="text-xs">{ input.Label }</span>
+		<span class="text-xs font-thin">Max file size is 500kb. Supported files are .jpg and .png</span>
+		<div x-on:dragover.prevent x-on:drop="handleDrop" class="w-full my-2 h-[20%] border-2 border-dotted border-gray-300">
+			<label id="droparea" for="img-input">
+				<input type="file" name="image" x-on:change="handleChange" accept="image/*" class="hidden" id="img-input"/>
+				<div x-show="!showFile" class="w-full h-full m-2 text-xs pb-20 text-blue-600 ">
+					Click or drag and drop your image to upload!
+				</div>
+				<img x-show="showFile" :src="file" class="w-min h-min p-2"/>
+			</label>
+		</div>
+		<div
+			class="bg-gray-100 w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none flex justify-between items-center"
+		>
+			<span x-text="fileName"></span>
+			<button class="w-4 h-4" x-on:click="handleClick">x</button>
+		</div>
+	</div>
 }
