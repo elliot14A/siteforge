@@ -64,7 +64,7 @@ templ HomeContent() {
 			</div>
 			<div class="my-2 flex flex-col space-y-4">
 				@components.Section("Section three")
-				@components.ImageInput(imageInputParams)
+				@components.ImageInput(components.ImageInputParams{Label: "some label"})
 				<div>
 					@components.Input(HeaderinputParams)
 				</div>

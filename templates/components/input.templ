@@ -29,24 +29,32 @@ templ Input(input InputParams) {
 }
 
 templ ImageInput(input ImageInputParams) {
-	<script src="/static/js/drag_drop.js"></script>
-	<div x-data="initDragAndDrop()">
-		<span class="text-xs">{ input.Label }</span>
-		<span class="text-xs font-thin">Max file size is 500kb. Supported files are .jpg and .png</span>
-		<div x-on:dragover.prevent x-on:drop="handleDrop" class="w-full my-2 h-[20%] border-2 border-dotted border-gray-300">
-			<label id="droparea" for="img-input">
-				<input type="file" name="image" x-on:change="handleChange" accept="image/*" class="hidden" id="img-input"/>
-				<div x-show="!showFile" class="w-full h-full m-2 text-xs pb-20 text-blue-600 ">
-					Click or drag and drop your image to upload!
-				</div>
-				<img x-show="showFile" :src="file" class="w-min h-min p-2"/>
-			</label>
-		</div>
-		<div
-			class="bg-gray-100 w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none flex justify-between items-center"
-		>
-			<span x-text="fileName"></span>
-			<button class="w-4 h-4" x-on:click="handleClick">x</button>
+	<div>
+		<script src="/static/js/drag_drop.js"></script>
+		<div x-data="initDragAndDrop()">
+			<div class="flex flex-col space-y-1">
+				<span class="text-xs">{ input.Label }</span>
+				<span class="text-xs font-thin">Max file size is 500kb. Supported files are .jpg and .png</span>
+			</div>
+			<div
+				x-on:dragover.prevent
+				x-on:drop="handleDrop"
+				class="w-full my-2 h-[20%] border-2 border-dotted border-gray-300"
+			>
+				<label id="droparea" for={ input.Label }>
+					<input type="file" name="image" x-on:change="handleChange" accept="image/*" class="hidden" id={ input.Label }/>
+					<div x-show="!showFile" class="w-full h-full m-2 text-xs pb-20 text-blue-600 ">
+						Click or drag and drop your image to upload!
+					</div>
+					<img x-show="showFile" :src="file" class="w-min h-min p-2"/>
+				</label>
+			</div>
+			<div
+				class="bg-gray-100 w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none flex justify-between items-center"
+			>
+				<span x-text="fileName"></span>
+				<button class="w-4 h-4" x-on:click="handleClick">x</button>
+			</div>
 		</div>
 	</div>
 }

@@ -4,6 +4,7 @@ function initDragAndDrop() {
     file: "",
     showFile: false,
     handleChange(event) {
+      console.log("changed");
       const file = event.target.files[0];
       if (!file) return;
       this.handleFile(file);
