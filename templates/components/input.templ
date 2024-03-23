@@ -46,7 +46,9 @@ templ ImageInput(input ImageInputParams) {
 					<div x-show="!showFile" class="w-full h-full m-2 text-xs pb-20 text-blue-600 ">
 						Click or drag and drop your image to upload!
 					</div>
-					<img x-show="showFile" :src="file" class="w-min h-min p-2"/>
+					<div x-show="showFile" class="h-auto w-full">
+						<img :src="file" class="p-2 w-[40%] h-auto"/>
+					</div>
 				</label>
 			</div>
 			<div
@@ -54,6 +56,67 @@ templ ImageInput(input ImageInputParams) {
 			>
 				<span x-text="fileName"></span>
 				<button class="w-4 h-4" x-on:click="handleClick">x</button>
+			</div>
+		</div>
+	</div>
+}
+
+type MultiImageInputParams struct {
+	ImagesUrl []string
+	Label     string
+}
+
+templ MultiImageInput(input MultiImageInputParams) {
+	<div>
+		<script src="/static/js/drag_drop.js"></script>
+		<div x-data="initDragAndDropMultiple()">
+			<div class="flex flex-col space-y-1">
+				<span class="text-xs">{ input.Label } <span class="text-xs text-gray-400">(4 needed)</span></span>
+				<span class="text-xs font-thin">Max file size is 500kb. Supported files are .jpg and .png</span>
+			</div>
+			<div
+				x-on:dragover.prevent
+				x-on:drop="handleDrop"
+				class="w-full my-2 h-[20%] border-2 border-dotted border-gray-300"
+			>
+				<label id="multidropare" for={ input.Label }>
+					<input
+						x-on:change="handleChange"
+						type="file"
+						name="images"
+						accept="image/*"
+						class="hidden"
+						id={ input.Label }
+						multiple
+					/>
+					<div x-show="!showFiles" class="w-full h-full m-2 text-xs pb-20 text-blue-600 ">
+						Click or drag and drop your images to upload!
+					</div>
+					<div class="flex space-x-1" x-show="showFiles">
+						<template x-for="(image, index) in files" :key="index">
+							<div>
+								<div x-show="files.length == 1">
+									<button
+										x-on:click.prevent="handleClick(index)"
+										class="absolute z-10 rounded-full bg-red-600 w-6 h-6 flex justify-center items-center cursor-pointer"
+									>
+										<span class="text-sm text-white">x</span>
+									</button>
+									<img :src="image" class="p-2 w-[40%] h-auto"/>
+								</div>
+								<div x-show="files.length > 1" class="h-auto w-full">
+									<button
+										x-on:click.prevent="handleClick(index)"
+										class="absolute z-10 rounded-full bg-red-600 w-6 h-6 flex justify-center items-center cursor-pointer"
+									>
+										<span class="text-sm text-white">x</span>
+									</button>
+									<img :src="image" class="p-2 w-full h-auto"/>
+								</div>
+							</div>
+						</template>
+					</div>
+				</label>
 			</div>
 		</div>
 	</div>

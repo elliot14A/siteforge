@@ -1,16 +1,158 @@
 package content
 
+import "github.com/elliot14A/siteforge/templates/components"
+
+var projectImageInputParams = components.ImageInputParams{
+	Label: "Project 1",
+}
+
+var projectInputParams = components.InputParams{
+	InputType:   "text",
+	Placeholder: "Housing, Apartments ...",
+	XModel:      "",
+	Name:        "project",
+	Label:       "Project Title",
+	TextSize:    "text-xs",
+}
+
+var projectDateInputParams = components.InputParams{
+	InputType: "date",
+	Label:     "Project Date",
+	XModel:    "",
+	Name:      "date",
+	TextSize:  "text-xs",
+}
+
+var projectLocationInputParam = components.InputParams{
+	InputType:   "text",
+	Label:       "Project Location",
+	Name:        "location",
+	TextSize:    "text-xs",
+	Placeholder: "Hyderabad",
+	XModel:      "",
+}
+
+var multipleImageInputParams = components.MultiImageInputParams{
+	Label: "Project Images",
+}
+
+var headerTitleInputParams = components.InputParams{
+	InputType:   "text",
+	Label:       "Header Title",
+	Name:        "headerTitle",
+	TextSize:    "text-xs",
+	Placeholder: "Innovative Solutions",
+	XModel:      "",
+}
+
+var tagLineInputParams = components.InputParams{
+	InputType:   "text",
+	Label:       "Tag Line",
+	Name:        "tagLine",
+	TextSize:    "text-xs",
+	Placeholder: "Innvoation at its best",
+	XModel:      "",
+}
+
+var sideImageInputParams = components.ImageInputParams{
+	Label: "Side Image",
+}
+
+var sideImageTitleInputParams = components.InputParams{
+	InputType:   "text",
+	Label:       "Side image title",
+	Name:        "sideImageTitle",
+	TextSize:    "text-xs",
+	Placeholder: "Innovative Solutions",
+	XModel:      "",
+}
+
+var sideImageTagLineInputParams = components.InputParams{
+	InputType:   "text",
+	Label:       "Side Image Tagline",
+	Name:        "sideImageTagLine",
+	TextSize:    "text-xs",
+	Placeholder: "Innvoation at its best",
+	XModel:      "",
+}
+
 templ AddProject() {
 	<div id="content" class="flex w-full h-full">
-		<div class="container mx-48 mt-[4.5rem]">
-			<span class="text-blue-600 text-sm">Project </span>
-			<span class="text-sm">/ New project</span>
-			<div class="mt-8 flex flex-col space-x-4">
-				<div class="w-full h-12 border-l-2 border-blue-600">
-					<image src="/static/assets/add.svg" class="w-min h-min"></image>
-					<span class="ml-[1.68rem] mt-4 text-[0.6rem] font-thin">Not live yet</span>
+		<div class="container mx-48 mt-12">
+			<div class="flex flex-col">
+				<div class="flex mt-6">
+					<span class="text-blue-600 text-sm">Project </span>
+					<span class="ml-2 text-sm">/ New project</span>
+				</div>
+				<div class="mt-8 flex flex-col space-x-4">
+					<div class="w-full h-12 border-l-2 border-blue-600">
+						<image src="/static/assets/add.svg" class="w-min h-min"></image>
+						<span class="ml-[1.68rem] mt-4 text-[0.6rem] font-thin">Not live yet</span>
+					</div>
+				</div>
+				<div class="flex flex-col space-y-4 mt-4">
+					@components.ImageInput(projectImageInputParams)
+					<div>
+						@components.Input(projectInputParams)
+					</div>
+					<div class="flex space-x-2">
+						<div class="w-full">
+							@components.Input(projectDateInputParams)
+						</div>
+						<div class="w-full">
+							@components.Input(projectLocationInputParam)
+						</div>
+					</div>
+				</div>
+				<div class="flex flex-col space-y-4 mt-4">
+					@components.Section("Section two")
+					<div class="mt-4">
+						@components.MultiImageInput(multipleImageInputParams)
+					</div>
+				</div>
+				<div class="flex flex-col space-y-4 mb-4">
+					@components.Section("Section three")
+					<div class="mt-4">
+						@components.Input(headerTitleInputParams)
+					</div>
+					<div>
+						@components.Input(tagLineInputParams)
+					</div>
+				</div>
+				<div class="flex flex-col space-y-4 mb-4">
+					@components.Section("Section four")
+					<div class="mt-4">
+						@components.ImageInput(sideImageInputParams)
+					</div>
+					<div class="flex flex-col">
+						<div>
+							@components.Input(sideImageTitleInputParams)
+						</div>
+						<div class="mt-4">
+							@components.Input(sideImageTagLineInputParams)
+						</div>
+					</div>
+				</div>
+				<div class="flex flex-col space-y-4 mb-4">
+					@components.Section("Section five")
+					<div class="mt-4"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 }
+
+templ StopLoading() {
+	<div id="loading" x-data="isLoading = false"></div>
+}
+
+/* <div class="flex justify-between">
+// <div id="loading"></div>
+// <button // type="submit" //
+	class="px-16 py-1 bg-black text-white transform transition-transform duration-100 ease-in hover:scale-x-105" / />
+// <span x-show="!isLoading" class="inline-block">Save Project</span>
+// <div x-show="isLoading" class="flex items-center justify-center text-white">
+	// <image src="/static/assets/spinner.svg" class="animate-spin duration-100 m-1"></image>
+	// </div>
+// </button>
+// </div> */

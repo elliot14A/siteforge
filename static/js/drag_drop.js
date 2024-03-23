@@ -1,6 +1,6 @@
 function initDragAndDrop() {
   return {
-    fileName: "No file to show",
+    fileName: "no file to show",
     file: "",
     showFile: false,
     handleChange(event) {
@@ -10,8 +10,8 @@ function initDragAndDrop() {
       this.handleFile(file);
     },
     handleDrop(event) {
-      event.preventDefault();
-      const file = event.dataTransfer.files[0];
+      event.preventdefault();
+      const file = event.datatransfer.files[0];
       if (!file) return;
       this.handleFile(file);
     },
@@ -27,7 +27,43 @@ function initDragAndDrop() {
     handleClick() {
       this.file = "";
       this.showFile = false;
-      this.fileName = "No file to show";
+      this.fileName = "no file to show";
+    },
+  };
+}
+
+function initDragAndDropMultiple() {
+  return {
+    showFiles: false,
+    files: [],
+    handleDrop(event) {
+      event.preventDefault();
+      const files = event.dataTransfer.files;
+      if (!files) return;
+      this.handleFiles(files);
+    },
+    handleChange(event) {
+      const files = event.target.files;
+      if (!files) return;
+      this.handleFiles(files);
+    },
+    handleFiles(files) {
+      const reader = new FileReader();
+      for (let i = 0; i < files.length; i++) {
+        reader.onload = () => {
+          this.files.push(reader.result);
+          this.showFiles = true;
+        };
+        reader.readAsDataURL(files[i]);
+      }
+    },
+    // @click="handleClick(index)"
+    handleClick(index) {
+      this.files = this.files.filter((_, i) => i !== index);
+      console.log(this.files);
+      if (this.files.length === 0) {
+        this.showFiles = false;
+      }
     },
   };
 }
